@@ -1,31 +1,31 @@
 const supabase = require("../config/supabase");
 
-const auth = async (req, res, next) => {
+const authMiddleware = async (req, res, next) => {
   try {
     const authorization = req.headers.authorization || "";
 
     if (!authorization.startsWith("Bearer ")) {
       return res.status(401).json({
         success: false,
-        message: "Missing access token",
+        message: "Authorization token is required",
       });
     }
 
-    const token = authorization.substring(7).trim();
+    const token = authorization.substring(7);
 
     if (!token) {
       return res.status(401).json({
         success: false,
-        message: "Missing access token",
+        message: "Authorization token is missing",
       });
     }
 
     const { data, error } = await supabase.auth.getUser(token);
 
-    if (error || !data || !data.user) {
+    if (error || !data.user) {
       return res.status(401).json({
         success: false,
-        message: "Invalid or expired access token",
+        message: "Invalid or expired session",
       });
     }
 
@@ -43,4 +43,4 @@ const auth = async (req, res, next) => {
   }
 };
 
-module.exports = auth;
+module.exports = authMiddleware;

@@ -11,12 +11,16 @@ if (!supabaseSecretKey) {
   throw new Error("SUPABASE_SECRET_KEY is missing from .env");
 }
 
-const supabase = createClient(supabaseUrl, supabaseSecretKey, {
-  auth: {
-    autoRefreshToken: false,
-    persistSession: false,
-    detectSessionInUrl: false,
-  },
-});
+const supabase = createClient(
+  supabaseUrl,
+  supabaseSecretKey,
+  {
+    auth: {
+      autoRefreshToken: false,
+      persistSession: false,
+      detectSessionInUrl: false,
+    },
+  }
+);
 
 module.exports = supabase;

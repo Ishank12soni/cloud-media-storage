@@ -34,7 +34,7 @@ export default function SignUpPage() {
    */
   const isValidName = (name: string) => {
   // Only letters and spaces are allowed.
-  const namePattern = /^[A-Za-z]+(?: [A-Za-z]+)*$/;
+  const namePattern = /^[A-Za-z0-9]+(?: [A-Za-z0-9]+)*$/;
 
   return namePattern.test(name.trim());
 };
@@ -365,6 +365,13 @@ export default function SignUpPage() {
           {/* Google */}
           <button
             type="button"
+            onClick={async () => {
+              const { error } = await supabase.auth.signInWithOAuth({
+                provider: "google",
+                options: { redirectTo: `${window.location.origin}/dashboard` },
+              });
+              if (error) setErrorMessage(error.message);
+            }}
             className="flex w-full items-center justify-center gap-3 rounded-xl border border-slate-300 bg-white px-5 py-3.5 font-semibold text-slate-700 transition hover:bg-slate-50"
           >
             <span className="text-lg font-bold">G</span>

@@ -203,17 +203,12 @@ export default function SignInPage() {
                 </span>
               </label>
 
-              <button
-                type="button"
-                onClick={() => {
-                  setErrorMessage(
-                    "Password reset will be added next."
-                  );
-                }}
+              <Link
+                href="/forgot-password"
                 className="text-sm font-medium text-blue-600 hover:text-blue-700"
               >
                 Forgot Password?
-              </button>
+              </Link>
             </div>
 
             {/* Error */}
@@ -254,12 +249,16 @@ export default function SignInPage() {
           {/* Google */}
           <button
             type="button"
+            onClick={async () => {
+              const { error } = await supabase.auth.signInWithOAuth({
+                provider: "google",
+                options: { redirectTo: `${window.location.origin}/dashboard` },
+              });
+              if (error) setErrorMessage(error.message);
+            }}
             className="flex w-full items-center justify-center gap-3 rounded-xl border border-slate-300 bg-white px-5 py-3.5 font-semibold text-slate-700 transition hover:bg-slate-50"
           >
-            <span className="text-lg font-bold">
-              G
-            </span>
-
+            <span className="text-lg font-bold">G</span>
             Continue with Google
           </button>
 

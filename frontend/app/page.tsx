@@ -171,9 +171,7 @@ export default function Home() {
               darkMode ? "text-gray-400" : "text-gray-500"
             }`}
           >
-            Keep your private media locked safely behind your personal
-            Secret Vault PIN. Upload, organize, share and access your
-            files from anywhere.
+            Upload, organize, search, share and access your files from anywhere with a simple private cloud storage dashboard.
           </p>
 
           {/* BUTTONS */}
@@ -204,7 +202,7 @@ export default function Home() {
             }`}
           >
             <span>🔒 Secure Encryption</span>
-            <span>◈ Secret Vault</span>
+            <span>⚡ Secure Access</span>
             <span>♢ Easy Sharing</span>
             <span>▣ Access Anywhere</span>
           </div>
